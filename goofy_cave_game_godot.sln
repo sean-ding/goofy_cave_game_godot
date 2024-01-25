@@ -1,0 +1,19 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "goofy_cave_game_godot", "goofy_cave_game_godot.csproj", "{442AE820-7FC7-4FF2-BEBA-295A68951509}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{442AE820-7FC7-4FF2-BEBA-295A68951509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{442AE820-7FC7-4FF2-BEBA-295A68951509}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{442AE820-7FC7-4FF2-BEBA-295A68951509}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{442AE820-7FC7-4FF2-BEBA-295A68951509}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{442AE820-7FC7-4FF2-BEBA-295A68951509}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{442AE820-7FC7-4FF2-BEBA-295A68951509}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccp166nta2ifk"]
+
+[ext_resource type="Texture2D" uid="uid://b32dtw0trqprd" path="res://resource/tilemap/curses_vector_24x36.png" id="1_ixcx1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2h3y"]
+atlas = ExtResource("1_ixcx1")
+region = Rect2(0, 144, 24, 36)
+
+[node name="Player" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_d2h3y")
