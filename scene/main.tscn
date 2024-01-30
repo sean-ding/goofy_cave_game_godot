@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx06803qwxqw4"]
+[gd_scene load_steps=8 format=3 uid="uid://cx06803qwxqw4"]
 
 [ext_resource type="PackedScene" uid="uid://ccp166nta2ifk" path="res://entity/player/player.tscn" id="1_s1f2j"]
 [ext_resource type="Script" path="res://scene/Main.cs" id="1_wtyah"]
 [ext_resource type="Texture2D" uid="uid://b32dtw0trqprd" path="res://resource/tilemap/curses_vector_24x36.png" id="2_3ps7u"]
+[ext_resource type="PackedScene" uid="uid://cwuy54p1kmwlr" path="res://item/weapon/fists.tscn" id="4_2bhte"]
 [ext_resource type="Script" path="res://scene/PlayerCamera.cs" id="4_u6dxp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fxjpk"]
@@ -794,6 +795,16 @@ layer_0/tile_data = PackedInt32Array(-196610, 196608, 2, -196609, 196608, 2, -26
 [node name="Player" parent="." instance=ExtResource("1_s1f2j")]
 position = Vector2(160, 160)
 Speed = 200.0
+
+[node name="Limbs" type="Node" parent="Player"]
+
+[node name="LeftHand" type="Node" parent="Player/Limbs"]
+
+[node name="Fists" parent="Player/Limbs/LeftHand" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand" type="Node" parent="Player/Limbs"]
+
+[node name="Fists" parent="Player/Limbs/RightHand" instance=ExtResource("4_2bhte")]
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position = Vector2(160, 160)

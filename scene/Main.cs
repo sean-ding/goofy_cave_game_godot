@@ -8,7 +8,7 @@ public partial class Main : Node2D
 	public override void _Ready()
 	{
 		GetWindow().Size = new Vector2I(1920, 1080);
-		GetWindow().Mode = Window.ModeEnum.Maximized;
+		GetWindow().Mode = Window.ModeEnum.ExclusiveFullscreen;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

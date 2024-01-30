@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwuy54p1kmwlr"]
+
+[ext_resource type="Texture2D" uid="uid://b32dtw0trqprd" path="res://resource/tilemap/curses_vector_24x36.png" id="1_iw47j"]
+[ext_resource type="Script" path="res://item/weapon/FistWeapon.cs" id="1_yrwf1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qsh7i"]
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3kmwt"]
+atlas = ExtResource("1_iw47j")
+region = Rect2(216, 72, 24, 36)
+margin = Rect2(5.9, 1.75, 0, 0)
+
+[node name="Fists" type="Area2D" groups=["weapons"]]
+script = ExtResource("1_yrwf1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qsh7i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_3kmwt")
