@@ -7,11 +7,15 @@ public partial class PlayerScript : CharacterBody2D
 {
 	[Export] public float Speed = 200.0f;
 	[Export] public float LerpSpeed = 10.0f;
-
+	
 	public List<Node> EquippedList = new();
+
+	private AnimationPlayer _animPlayer;
 	
 	public override void _Ready()
 	{
+		_animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		
 		foreach (var limb in GetNode<Node>("Limbs").GetChildren())
 		{
 			if (limb.GetChildCount() != 0)
@@ -58,6 +62,8 @@ public partial class PlayerScript : CharacterBody2D
 			{
 				weapon.Call("Attack", this, mousePos, weaponList.Count);
 			}
+			
+			_animPlayer.Play("weapon_fist_1");
 		}
 	}
 }
