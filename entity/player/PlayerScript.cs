@@ -44,13 +44,19 @@ public partial class PlayerScript : CharacterBody2D
 		if (@event.IsActionPressed("click"))
 		{
 			var mousePos = GetGlobalMousePosition();
+
+			var weaponList = new List<Node>();
 			
 			foreach (var item in EquippedList)
 			{
 				if (item.HasMethod("Attack"))
 				{
-					item.Call("Attack", this, mousePos);
+					weaponList.Add(item);
 				}
+			}
+			foreach (var weapon in weaponList)
+			{
+				weapon.Call("Attack", this, mousePos, weaponList.Count);
 			}
 		}
 	}

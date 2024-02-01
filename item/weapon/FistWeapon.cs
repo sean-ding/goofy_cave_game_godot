@@ -24,11 +24,17 @@ public partial class FistWeapon : Area2D
 		Position += Transform.X * Speed * (float) delta;
 	}
 
-	public void Attack(Node2D attacker, Vector2 targetPos)
+	public void Attack(Node2D attacker, Vector2 targetPos, int speed)
 	{
-		GlobalPosition = attacker.GlobalPosition;
-		LookAt(targetPos);
-		Visible = true;
-		_attacking = true;
+		if (_attacking == false)
+		{
+			GlobalPosition = attacker.GlobalPosition;
+			GlobalPosition += new Vector2((float) GD.RandRange(-15.0, 15.0), (float) GD.RandRange(-15.0, 15.0));
+			LookAt(targetPos);
+			Visible = true;
+			_attacking = true;
+			GetTree().CreateTimer(0.5 / speed).Timeout += () => _attacking = false;
+			
+		}
 	}
 }
