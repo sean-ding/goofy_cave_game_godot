@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwuy54p1kmwlr"]
 
 [ext_resource type="Texture2D" uid="uid://b32dtw0trqprd" path="res://resource/tilemap/curses_vector_24x36.png" id="1_iw47j"]
-[ext_resource type="Script" path="res://item/weapon/FistWeapon.cs" id="1_yrwf1"]
+[ext_resource type="Script" path="res://item/weapon/fist/FistWeapon.cs" id="1_yrwf1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qsh7i"]
 radius = 5.0

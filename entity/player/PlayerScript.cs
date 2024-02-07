@@ -11,12 +11,14 @@ public partial class PlayerScript : CharacterBody2D
 	public List<Node> EquippedList = new();
 
 	private AnimationPlayer _animPlayer;
+	private bool _attacking;
+	private int _combo;
 	
 	public override void _Ready()
 	{
 		_animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		
-		foreach (var limb in GetNode<Node>("Limbs").GetChildren())
+		foreach (var limb in GetNode<Node2D>("Limbs").GetChildren())
 		{
 			if (limb.GetChildCount() != 0)
 			{
@@ -27,16 +29,12 @@ public partial class PlayerScript : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 velocity;
+		var velocity = Vector2.Zero;
 
 		var direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		if (direction != Vector2.Zero)
 		{
 			velocity = direction.Normalized() * Speed;
-		}
-		else
-		{
-			velocity = Vector2.Zero;
 		}
 
 		Velocity = Velocity.Lerp(velocity, (float)delta * LerpSpeed);
@@ -47,8 +45,9 @@ public partial class PlayerScript : CharacterBody2D
 	{
 		if (@event.IsActionPressed("click"))
 		{
+			AttackData attack;
 			var mousePos = GetGlobalMousePosition();
-
+			
 			var weaponList = new List<Node>();
 			
 			foreach (var item in EquippedList)
@@ -60,10 +59,11 @@ public partial class PlayerScript : CharacterBody2D
 			}
 			foreach (var weapon in weaponList)
 			{
-				weapon.Call("Attack", this, mousePos, weaponList.Count);
+				attack = (AttackData) weapon.Call("LightAttack", this, mousePos, _combo);
+				_animPlayer.Play(attack.AttackAnim);
+				Velocity += attack.Displacement;
+				GD.Print("erm!");
 			}
-			
-			_animPlayer.Play("weapon_fist_1");
 		}
 	}
 }
