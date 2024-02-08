@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Numerics;
 using Godot;
+using Vector2 = Godot.Vector2;
 
 namespace goofy_cave_game_godot.entity.player;
 
@@ -8,7 +10,7 @@ public partial class PlayerScript : CharacterBody2D
 	[Export] public float Speed = 200.0f;
 	[Export] public float LerpSpeed = 10.0f;
 	
-	public List<Node> EquippedList = new();
+	public List<Node2D> EquippedList = new();
 
 	private AnimationPlayer _animPlayer;
 	private bool _attacking;
@@ -22,7 +24,8 @@ public partial class PlayerScript : CharacterBody2D
 		{
 			if (limb.GetChildCount() != 0)
 			{
-				EquippedList.Add(limb.GetChild(0));
+				EquippedList.Add(limb.GetChild<Node2D>(0));
+				GD.Print(limb.Name);
 			}
 		}
 	}
@@ -36,8 +39,9 @@ public partial class PlayerScript : CharacterBody2D
 		{
 			velocity = direction.Normalized() * Speed;
 		}
-
+		
 		Velocity = Velocity.Lerp(velocity, (float)delta * LerpSpeed);
+		
 		MoveAndSlide();
 	}
 	
@@ -45,24 +49,24 @@ public partial class PlayerScript : CharacterBody2D
 	{
 		if (@event.IsActionPressed("click"))
 		{
-			AttackData attack;
 			var mousePos = GetGlobalMousePosition();
 			
-			var weaponList = new List<Node>();
+			var weaponList = new List<Node2D>();
 			
 			foreach (var item in EquippedList)
 			{
-				if (item.HasMethod("Attack"))
+				if (item.HasMethod("LightAttack"))
 				{
 					weaponList.Add(item);
 				}
 			}
 			foreach (var weapon in weaponList)
 			{
-				attack = (AttackData) weapon.Call("LightAttack", this, mousePos, _combo);
+				var attack = (AttackData) weapon.Call("LightAttack", this, mousePos, _combo);
+				weapon.GetParent<Node2D>().LookAt(mousePos);
 				_animPlayer.Play(attack.AttackAnim);
-				Velocity += attack.Displacement;
-				GD.Print("erm!");
+				Velocity = weapon.GetParent<Node2D>().GetGlobalTransform().BasisXform(attack.Displacement);
+				_combo += attack.Combo;
 			}
 		}
 	}
