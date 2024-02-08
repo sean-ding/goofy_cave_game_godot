@@ -22,6 +22,7 @@ public partial class FistWeapon : Area2D
 			AttackData.DamageTypes.Bludgeon, 
 			0.2f, 
 			new Vector2(300, 0), 
+			new Vector2(-300, 0),
 			"weapon_fist_lightattack1",
 			1
 		);
@@ -32,6 +33,7 @@ public partial class FistWeapon : Area2D
 			AttackData.DamageTypes.Bludgeon, 
 			0.2f, 
 			new Vector2(300, 0), 
+			new Vector2(-300, 0),
 			"weapon_fist_lightattack2",
 			1
 		);
@@ -42,6 +44,7 @@ public partial class FistWeapon : Area2D
 			AttackData.DamageTypes.Bludgeon, 
 			0.3f, 
 			new Vector2(500, 0), 
+			new Vector2(-500, 0),
 			"weapon_fist_lightattack3",
 			-2
 		);
@@ -51,7 +54,8 @@ public partial class FistWeapon : Area2D
 			10, 
 			AttackData.DamageTypes.Bludgeon, 
 			0.8f, 
-			new Vector2(0.8f, 0), 
+			new Vector2(800, 0), 
+			new Vector2(-700, 0),
 			"weapon_fist_heavyattack1",
 			0
 		);

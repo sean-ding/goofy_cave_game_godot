@@ -24,14 +24,16 @@ public partial class AttackData : Node
 	public DamageTypes DamageType { get; set; }
 	public float AttackTime { get; set; }
 	public Vector2 Displacement { get; set; }
+	public Vector2 Knockback { get; set; }
 	public string AttackAnim { get; set; }
 	public int Combo { get; set; }
-	public AttackData(double damage, DamageTypes damageType, float attackTime, Vector2 displacement, string attackAnim, int combo)
+	public AttackData(double damage, DamageTypes damageType, float attackTime, Vector2 displacement, Vector2 knockback, string attackAnim, int combo)
 	{
 		Damage = damage;
 		DamageType = damageType;
 		AttackTime = attackTime;
 		Displacement = displacement;
+		Knockback = knockback;
 		AttackAnim = attackAnim;
 		Combo = combo;
 	}
