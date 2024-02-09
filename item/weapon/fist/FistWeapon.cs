@@ -25,7 +25,7 @@ public partial class FistWeapon : Area2D
 			new Vector2(-300, 0),
 			"weapon_fist_lightattack1",
 			1,
-			0.07f
+			0.7f
 		);
 		
 		_lightAttack2 = new AttackData
@@ -37,7 +37,7 @@ public partial class FistWeapon : Area2D
 			new Vector2(-300, 0),
 			"weapon_fist_lightattack2",
 			1,
-			0.07f
+			0.7f
 		);
 		
 		_lightAttack3 = new AttackData
@@ -49,7 +49,7 @@ public partial class FistWeapon : Area2D
 			new Vector2(-500, 0),
 			"weapon_fist_lightattack3",
 			-2,
-			0.07f
+			0.7f
 		);
 		
 		_heavyAttack1 = new AttackData

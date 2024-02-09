@@ -966,7 +966,13 @@ libraries = {
 }
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-position = Vector2(160, 160)
 script = ExtResource("4_u6dxp")
+
+[node name="Label" type="Label" parent="PlayerCamera"]
+offset_left = -320.0
+offset_top = -180.0
+offset_right = -126.0
+offset_bottom = -116.0
+text = "Combo Number: "
 
 [connection signal="body_entered" from="Player/Limbs/RightHand/Fist" to="Player/Limbs/RightHand/Fist" method="_OnBodyEntered"]
