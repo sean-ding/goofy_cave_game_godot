@@ -49,25 +49,38 @@ public partial class PlayerScript : CharacterBody2D
 	{
 		if (@event.IsActionPressed("click"))
 		{
-			var mousePos = GetGlobalMousePosition();
-			
-			var weaponList = new List<Node2D>();
-			
-			foreach (var item in EquippedList)
+			if (!_attacking)
 			{
-				if (item.HasMethod("LightAttack"))
-				{
-					weaponList.Add(item);
-				}
-			}
-			foreach (var weapon in weaponList)
-			{
-				var attack = (AttackData) weapon.Call("LightAttack", this, mousePos, _combo);
-				weapon.GetParent<Node2D>().LookAt(mousePos);
-				_animPlayer.Play(attack.AttackAnim);
-				Velocity = weapon.GetParent<Node2D>().GetGlobalTransform().BasisXform(attack.Displacement);
-				_combo += attack.Combo;
+				Attack();
 			}
 		}
+	}
+
+	private async void Attack()
+	{
+		_attacking = true;
+				
+		var mousePos = GetGlobalMousePosition();
+		var weaponList = new List<Node2D>();
+				
+		foreach (var item in EquippedList)
+		{
+			if (item.HasMethod("LightAttack"))
+			{
+				weaponList.Add(item);
+			}
+		}
+		foreach (var weapon in weaponList)
+		{
+			var attack = (AttackData) weapon.Call("LightAttack", this, mousePos, _combo);
+			weapon.GetParent<Node2D>().LookAt(mousePos);
+			_animPlayer.Play(attack.AttackAnim, -1, weaponList.Count);
+			Velocity = weapon.GetParent<Node2D>().GetGlobalTransform().BasisXform(attack.Displacement);
+			
+			_combo += attack.Combo;
+		}
+
+		_combo = 0;
+		_attacking = false;
 	}
 }

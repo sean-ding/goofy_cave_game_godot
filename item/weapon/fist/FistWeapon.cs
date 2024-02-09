@@ -18,45 +18,49 @@ public partial class FistWeapon : Area2D
 
 		_lightAttack1 = new AttackData
 		(
-			3, 
-			AttackData.DamageTypes.Bludgeon, 
-			0.2f, 
-			new Vector2(300, 0), 
+			3,
+			AttackData.DamageTypes.Bludgeon,
+			0.2f,
+			new Vector2(300, 0),
 			new Vector2(-300, 0),
 			"weapon_fist_lightattack1",
-			1
+			1,
+			0.07f
 		);
 		
 		_lightAttack2 = new AttackData
 		(
-			3, 
-			AttackData.DamageTypes.Bludgeon, 
-			0.2f, 
-			new Vector2(300, 0), 
+			3,
+			AttackData.DamageTypes.Bludgeon,
+			0.2f,
+			new Vector2(300, 0),
 			new Vector2(-300, 0),
 			"weapon_fist_lightattack2",
-			1
+			1,
+			0.07f
 		);
 		
 		_lightAttack3 = new AttackData
 		(
-			5, 
-			AttackData.DamageTypes.Bludgeon, 
-			0.3f, 
-			new Vector2(500, 0), 
+			5,
+			AttackData.DamageTypes.Bludgeon,
+			0.3f,
+			new Vector2(500, 0),
 			new Vector2(-500, 0),
 			"weapon_fist_lightattack3",
-			-2
+			-2,
+			0.07f
 		);
 		
 		_heavyAttack1 = new AttackData
 		(
-			10, 
-			AttackData.DamageTypes.Bludgeon, 
-			0.8f, 
-			new Vector2(800, 0), 
-			new Vector2(-700, 0),
+			10,
+			AttackData.DamageTypes.Bludgeon,
+			0.8f,
+			new Vector2(800, 0),
+			new Vector2(-1000, 0),
 			"weapon_fist_heavyattack1",
+			0,
 			0
 		);
 	}
@@ -69,9 +73,19 @@ public partial class FistWeapon : Area2D
 	public override void _PhysicsProcess(double delta)
 	{
 	}
+	
+	private void _OnBodyEntered(PhysicsBody2D body)
+	{
+		if (_attacking && !body.IsInGroup("player"))
+		{
+			GD.Print(body.Name + " hit");
+		}
+	}
 
 	public AttackData LightAttack(Node2D attacker, Vector2 targetPos, int combo)
 	{
+		_attacking = true;
+		
 		return combo switch
 		{
 			0 => _lightAttack1,

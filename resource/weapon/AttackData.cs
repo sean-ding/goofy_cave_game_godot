@@ -27,7 +27,10 @@ public partial class AttackData : Node
 	public Vector2 Knockback { get; set; }
 	public string AttackAnim { get; set; }
 	public int Combo { get; set; }
-	public AttackData(double damage, DamageTypes damageType, float attackTime, Vector2 displacement, Vector2 knockback, string attackAnim, int combo)
+	public float ComboPostTime { get; set; }
+	public float ComboPreTime { get; set; }
+	
+	public AttackData(double damage, DamageTypes damageType, float attackTime, Vector2 displacement, Vector2 knockback, string attackAnim, int combo, float comboPostTime, float comboPreTime = -1)
 	{
 		Damage = damage;
 		DamageType = damageType;
@@ -36,5 +39,7 @@ public partial class AttackData : Node
 		Knockback = knockback;
 		AttackAnim = attackAnim;
 		Combo = combo;
+		ComboPostTime = comboPostTime;
+		ComboPreTime = comboPreTime < 0 ? comboPostTime : comboPreTime;
 	}
 }
