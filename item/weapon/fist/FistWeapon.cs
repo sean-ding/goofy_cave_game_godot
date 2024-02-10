@@ -25,7 +25,7 @@ public partial class FistWeapon : Area2D
 			new Vector2(-300, 0),
 			"weapon_fist_lightattack1",
 			1,
-			0.7f
+			0.3f
 		);
 		
 		_lightAttack2 = new AttackData
@@ -37,7 +37,7 @@ public partial class FistWeapon : Area2D
 			new Vector2(-300, 0),
 			"weapon_fist_lightattack2",
 			1,
-			0.7f
+			0.3f
 		);
 		
 		_lightAttack3 = new AttackData
@@ -49,7 +49,7 @@ public partial class FistWeapon : Area2D
 			new Vector2(-500, 0),
 			"weapon_fist_lightattack3",
 			-2,
-			0.7f
+			0
 		);
 		
 		_heavyAttack1 = new AttackData
@@ -84,19 +84,24 @@ public partial class FistWeapon : Area2D
 
 	public AttackData LightAttack(Node2D attacker, Vector2 targetPos, int combo)
 	{
-		_attacking = true;
-		
-		return combo switch
+		var attackData = combo switch
 		{
 			0 => _lightAttack1,
 			1 => _lightAttack2,
 			2 => _lightAttack3,
 			_ => _lightAttack1
 		};
+		
+		return attackData;
 	}
 	
 	public AttackData HeavyAttack(Node2D attacker, Vector2 targetPos)
 	{
 		return _heavyAttack1;
+	}
+
+	public void SetAttacking(bool state)
+	{
+		_attacking = state;
 	}
 }

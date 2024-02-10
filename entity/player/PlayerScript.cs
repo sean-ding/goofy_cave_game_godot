@@ -71,7 +71,8 @@ public partial class PlayerScript : CharacterBody2D
 	{
 		_attacking = true;
 		_comboWindow = false;
-				
+		_comboTimer?.Dispose();
+
 		var mousePos = GetGlobalMousePosition();
 		var weaponList = new List<Node2D>();
 
@@ -87,6 +88,7 @@ public partial class PlayerScript : CharacterBody2D
 		}
 		foreach (var weapon in weaponList)
 		{
+			weapon.Call("SetAttacking", true);
 			var attack = (AttackData) weapon.Call("LightAttack", this, mousePos, _combo);
 			if (attack.ComboPreTime < shortestPreTime || shortestPreTime < 0)
 			{
@@ -100,6 +102,7 @@ public partial class PlayerScript : CharacterBody2D
 			_animPlayer.Play(attack.AttackAnim, -1, weaponList.Count);
 			Velocity = weapon.GetParent<Node2D>().GetGlobalTransform().BasisXform(attack.Displacement);
 			await ToSignal(_animPlayer, "animation_finished");
+			weapon.Call("SetAttacking", false);
 			_combo += attack.Combo;
 		}
 
