@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using Godot;
@@ -8,11 +9,12 @@ namespace goofy_cave_game_godot.entity.player;
 public partial class PlayerScript : CharacterBody2D
 {
 	[Export] public float Speed = 200.0f;
-	[Export] public float LerpSpeed = 10.0f;
+	[Export] public float LerpSpeed = 0.1f;
+	[Export] public float Acceleration = 10000f;
+	[Export] public float Deceleration = 10000f;
 	
 	public List<Node2D> EquippedList = new();
-
-	private AnimationPlayer _animPlayer;
+	
 	private bool _attacking;
 	private int _combo;
 	private bool _comboWindow;
@@ -23,8 +25,6 @@ public partial class PlayerScript : CharacterBody2D
 	public override void _Ready()
 	{
 		_debugLabel = GetNode<Label>("../PlayerCamera/Label");
-		
-		_animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		
 		foreach (var limb in GetNode<Node2D>("Limbs").GetChildren())
 		{
@@ -44,16 +44,21 @@ public partial class PlayerScript : CharacterBody2D
 		if (direction != Vector2.Zero)
 		{
 			velocity = direction.Normalized() * Speed;
+			Velocity = Velocity.MoveToward(velocity, Acceleration * (float) delta);
+		}
+		else
+		{
+			Velocity = Velocity.MoveToward(Vector2.Zero, Deceleration * (float) delta);
 		}
 		
-		Velocity = Velocity.Lerp(velocity, (float)delta * LerpSpeed);
-		
 		MoveAndSlide();
+		
+		_debugLabel.Text = "Combo Number: " + _combo + "\nCan Combo: " + _comboWindow + "\n\nVelocity: " + Velocity + "\nTarget Velocity: " + velocity;
 	}
 
 	public override void _Process(double delta)
 	{
-		_debugLabel.Text = "Combo Number: " + _combo + "\nCan Combo: " + _comboWindow;
+		
 	}
 
 	public override void _Input(InputEvent @event)
@@ -95,7 +100,7 @@ public partial class PlayerScript : CharacterBody2D
 			}
 		}
 
-		var timeScale = longestAttack / totalTime * (0.8f * (weaponList.Count - 1) + 1);
+		var timeScale = totalTime / longestAttack * ((float) Math.Log(weaponList.Count) * -0.5f + 1);
 		
 		foreach (var weapon in weaponList)
 		{
@@ -110,9 +115,10 @@ public partial class PlayerScript : CharacterBody2D
 			{
 				shortestPostTime = attack.ComboPostTime;
 			}
-			_animPlayer.Play(attack.AttackAnim, -1, timeScale);
-			Velocity = weapon.GetParent<Node2D>().GetGlobalTransform().BasisXform(attack.Displacement);
-			await ToSignal(_animPlayer, "animation_finished");
+			var weaponAnimPlayer = (AnimationPlayer) weapon.Call("GetAnimPlayer");
+			weaponAnimPlayer.Play(attack.AttackAnim, -1, timeScale);
+			//Velocity = weapon.GetParent<Node2D>().GetGlobalTransform().BasisXform(attack.Displacement);
+			await ToSignal(weaponAnimPlayer, "animation_finished");
 			weapon.Call("SetAttacking", false);
 			_combo += attack.Combo;
 		}

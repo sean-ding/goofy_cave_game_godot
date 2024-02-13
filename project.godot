@@ -13,7 +13,12 @@ config_version=5
 config/name="goofy_cave_game_godot"
 run/main_scene="res://scene/main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
+run/flush_stdout_on_print.debug=false
 config/icon="res://icon.svg"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 

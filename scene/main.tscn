@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cx06803qwxqw4"]
+[gd_scene load_steps=8 format=3 uid="uid://cx06803qwxqw4"]
 
 [ext_resource type="PackedScene" uid="uid://ccp166nta2ifk" path="res://entity/player/player.tscn" id="1_s1f2j"]
 [ext_resource type="Script" path="res://scene/Main.cs" id="1_wtyah"]
 [ext_resource type="Texture2D" uid="uid://b32dtw0trqprd" path="res://resource/tilemap/curses_vector_24x36.png" id="2_3ps7u"]
 [ext_resource type="PackedScene" uid="uid://cwuy54p1kmwlr" path="res://item/weapon/fist/fist.tscn" id="4_2bhte"]
 [ext_resource type="Script" path="res://scene/PlayerCamera.cs" id="4_u6dxp"]
-[ext_resource type="AnimationLibrary" uid="uid://dmn7vytrht15e" path="res://item/weapon/fist/weapon_fist.res" id="5_l3ax6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fxjpk"]
 texture = ExtResource("2_3ps7u")
@@ -785,8 +784,6 @@ tile_size = Vector2i(24, 36)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_fxjpk")
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_rh2cy"]
-
 [node name="Main" type="Node2D"]
 script = ExtResource("1_wtyah")
 
@@ -796,6 +793,7 @@ format = 2
 layer_0/tile_data = PackedInt32Array(-196610, 196608, 2, -196609, 196608, 2, -262144, 196608, 2, -262143, 196608, 2, -65538, 196608, 2, 65534, 196608, 2, 131070, 196608, 2, 131073, 196608, 2, 393214, 196608, 2, 393215, 196608, 2, 196609, 196608, 2, 196611, 196608, 2, 262147, 196608, 2, 327683, 196608, 2, -262145, 196608, 2, -327680, 196608, 2, -262142, 196608, 2, -262141, 196608, 2, -262140, 196608, 2, -262139, 196608, 2, -262138, 196608, 2, -262137, 196608, 2, -262136, 196608, 2, -262135, 196608, 2, -262134, 196608, 2, -262133, 196608, 2, -262132, 196608, 2, -262131, 196608, 2, -262130, 196608, 2, -262129, 196608, 2, -262128, 196608, 2, -262127, 196608, 2, -262126, 196608, 2, -262125, 196608, 2, -262124, 196608, 2, -262123, 196608, 2, -262122, 196608, 2, -262121, 196608, 2, -262120, 196608, 2, -262119, 196608, 2, -262118, 196608, 2, -262117, 196608, 2, -262116, 196608, 2, -262115, 196608, 2, -262114, 196608, 2, -262113, 196608, 2, -262112, 196608, 2, -262111, 196608, 2, -262110, 196608, 2, -262109, 196608, 2, -262108, 196608, 2, -262107, 196608, 2, -262106, 196608, 2, -262105, 196608, 2, -262104, 196608, 2, -262103, 196608, 2, -262102, 196608, 2, -196566, 196608, 2, -131030, 196608, 2, -65494, 196608, 2, 42, 196608, 2, 65578, 196608, 2, 131114, 196608, 2, 196650, 196608, 2, 262186, 196608, 2, 327722, 196608, 2, 393258, 196608, 2, 458794, 196608, 2)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_s1f2j")]
+position = Vector2(38, 0)
 Speed = 200.0
 
 [node name="Limbs" type="Node2D" parent="Player"]
@@ -803,30 +801,15 @@ Speed = 200.0
 [node name="RightHand" type="Node2D" parent="Player/Limbs"]
 
 [node name="Fist" parent="Player/Limbs/RightHand" instance=ExtResource("4_2bhte")]
-visible = false
-position = Vector2(48, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Limbs/RightHand/Fist"]
-root_node = NodePath("../../../..")
-libraries = {
-"": SubResource("AnimationLibrary_rh2cy"),
-"weapon_fist": ExtResource("5_l3ax6")
-}
+position = Vector2(12, 8)
 
 [node name="LeftHand" type="Node2D" parent="Player/Limbs"]
 
 [node name="Fist" parent="Player/Limbs/LeftHand" instance=ExtResource("4_2bhte")]
-position = Vector2(38, 0)
 
 [node name="RightFoot" type="Node2D" parent="Player/Limbs"]
 
-[node name="Fist" parent="Player/Limbs/RightFoot" instance=ExtResource("4_2bhte")]
-position = Vector2(38, 0)
-
 [node name="LeftFoot" type="Node2D" parent="Player/Limbs"]
-
-[node name="Fist" parent="Player/Limbs/LeftFoot" instance=ExtResource("4_2bhte")]
-position = Vector2(38, 0)
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 script = ExtResource("4_u6dxp")
@@ -840,5 +823,3 @@ text = "Combo Number: "
 
 [connection signal="body_entered" from="Player/Limbs/RightHand/Fist" to="Player/Limbs/RightHand/Fist" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Player/Limbs/LeftHand/Fist" to="Player/Limbs/LeftHand/Fist" method="_OnBodyEntered"]
-[connection signal="body_entered" from="Player/Limbs/RightFoot/Fist" to="Player/Limbs/RightFoot/Fist" method="_OnBodyEntered"]
-[connection signal="body_entered" from="Player/Limbs/LeftFoot/Fist" to="Player/Limbs/LeftFoot/Fist" method="_OnBodyEntered"]

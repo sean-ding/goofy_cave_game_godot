@@ -6,6 +6,7 @@ public partial class FistWeapon : Area2D
 {
 	private bool _attacking;
 	private AttackData _currentAttack;
+	private AnimationPlayer _animPlayer;
 	
 	private AttackData _lightAttack1;
 	private AttackData _lightAttack2;
@@ -15,6 +16,7 @@ public partial class FistWeapon : Area2D
 	public override void _Ready()
 	{
 		Visible = false;
+		_animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 
 		_lightAttack1 = new AttackData
 		(
@@ -23,7 +25,7 @@ public partial class FistWeapon : Area2D
 			0.2f,
 			new Vector2(300, 0),
 			new Vector2(-300, 0),
-			"weapon_fist_lightattack1",
+			"weapon_fist/lightattack1",
 			1,
 			0.3f
 		);
@@ -35,7 +37,7 @@ public partial class FistWeapon : Area2D
 			0.2f,
 			new Vector2(300, 0),
 			new Vector2(-300, 0),
-			"weapon_fist_lightattack2",
+			"weapon_fist/lightattack2",
 			1,
 			0.3f
 		);
@@ -47,7 +49,7 @@ public partial class FistWeapon : Area2D
 			0.3f,
 			new Vector2(500, 0),
 			new Vector2(-500, 0),
-			"weapon_fist_lightattack3",
+			"weapon_fist/lightattack3",
 			-2,
 			0
 		);
@@ -59,7 +61,7 @@ public partial class FistWeapon : Area2D
 			0.8f,
 			new Vector2(800, 0),
 			new Vector2(-1000, 0),
-			"weapon_fist_heavyattack1",
+			"weapon_fist/heavyattack1",
 			0,
 			0
 		);
@@ -98,6 +100,11 @@ public partial class FistWeapon : Area2D
 	public AttackData HeavyAttack()
 	{
 		return _heavyAttack1;
+	}
+
+	public AnimationPlayer GetAnimPlayer()
+	{
+		return _animPlayer;
 	}
 
 	public void SetAttacking(bool state)

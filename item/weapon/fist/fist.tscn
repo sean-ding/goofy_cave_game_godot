@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwuy54p1kmwlr"]
+[gd_scene load_steps=7 format=3 uid="uid://cwuy54p1kmwlr"]
 
 [ext_resource type="Texture2D" uid="uid://b32dtw0trqprd" path="res://resource/tilemap/curses_vector_24x36.png" id="1_iw47j"]
 [ext_resource type="Script" path="res://item/weapon/fist/FistWeapon.cs" id="1_yrwf1"]
+[ext_resource type="AnimationLibrary" uid="uid://dmn7vytrht15e" path="res://item/weapon/fist/weapon_fist.res" id="3_3jtc2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qsh7i"]
 radius = 5.0
@@ -11,7 +12,10 @@ atlas = ExtResource("1_iw47j")
 region = Rect2(216, 72, 24, 36)
 margin = Rect2(5.9, 1.75, 0, 0)
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rh2cy"]
+
 [node name="Fist" type="Area2D"]
+position = Vector2(38, 0)
 script = ExtResource("1_yrwf1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -20,3 +24,9 @@ shape = SubResource("CircleShape2D_qsh7i")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_3kmwt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rh2cy"),
+"weapon_fist": ExtResource("3_3jtc2")
+}
