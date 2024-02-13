@@ -82,7 +82,7 @@ public partial class FistWeapon : Area2D
 		}
 	}
 
-	public AttackData LightAttack(Node2D attacker, Vector2 targetPos, int combo)
+	public AttackData LightAttack(int combo)
 	{
 		var attackData = combo switch
 		{
@@ -95,7 +95,7 @@ public partial class FistWeapon : Area2D
 		return attackData;
 	}
 	
-	public AttackData HeavyAttack(Node2D attacker, Vector2 targetPos)
+	public AttackData HeavyAttack()
 	{
 		return _heavyAttack1;
 	}

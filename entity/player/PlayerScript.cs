@@ -73,9 +73,10 @@ public partial class PlayerScript : CharacterBody2D
 		_comboWindow = false;
 		_comboTimer?.Dispose();
 
-		var mousePos = GetGlobalMousePosition();
 		var weaponList = new List<Node2D>();
 
+		var longestAttack = 0f;
+		var totalTime = 0f;
 		var shortestPreTime = -1f;
 		var shortestPostTime = -1f;
 				
@@ -83,13 +84,24 @@ public partial class PlayerScript : CharacterBody2D
 		{
 			if (item.HasMethod("LightAttack"))
 			{
+				var attack = (AttackData) item.Call("LightAttack", _combo);
+				if (attack.AttackTime > longestAttack)
+				{
+					longestAttack = attack.AttackTime;
+				}
+
+				totalTime += attack.AttackTime;
 				weaponList.Add(item);
 			}
 		}
+
+		var timeScale = longestAttack / totalTime * (0.8f * (weaponList.Count - 1) + 1);
+		
 		foreach (var weapon in weaponList)
 		{
+			weapon.GetParent<Node2D>().LookAt(GetGlobalMousePosition());
+			var attack = (AttackData) weapon.Call("LightAttack", _combo);
 			weapon.Call("SetAttacking", true);
-			var attack = (AttackData) weapon.Call("LightAttack", this, mousePos, _combo);
 			if (attack.ComboPreTime < shortestPreTime || shortestPreTime < 0)
 			{
 				shortestPreTime = attack.ComboPreTime;
@@ -98,8 +110,7 @@ public partial class PlayerScript : CharacterBody2D
 			{
 				shortestPostTime = attack.ComboPostTime;
 			}
-			weapon.GetParent<Node2D>().LookAt(mousePos);
-			_animPlayer.Play(attack.AttackAnim, -1, weaponList.Count);
+			_animPlayer.Play(attack.AttackAnim, -1, timeScale);
 			Velocity = weapon.GetParent<Node2D>().GetGlobalTransform().BasisXform(attack.Displacement);
 			await ToSignal(_animPlayer, "animation_finished");
 			weapon.Call("SetAttacking", false);
