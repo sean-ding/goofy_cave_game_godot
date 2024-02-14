@@ -21,10 +21,12 @@ public partial class PlayerScript : CharacterBody2D
 	private SceneTreeTimer _comboTimer;
 
 	private Label _debugLabel;
+	private Sprite2D _sprite;
 	
 	public override void _Ready()
 	{
 		_debugLabel = GetNode<Label>("../PlayerCamera/Label");
+		_sprite = GetNode<Sprite2D>("SpriteContainer/Sprite2D");
 		
 		foreach (var limb in GetNode<Node2D>("Limbs").GetChildren())
 		{
@@ -58,7 +60,7 @@ public partial class PlayerScript : CharacterBody2D
 
 	public override void _Process(double delta)
 	{
-		
+		_sprite.GlobalPosition = _sprite.GlobalPosition.Lerp(GlobalPosition, (float) delta * 100);
 	}
 
 	public override void _Input(InputEvent @event)
@@ -117,7 +119,7 @@ public partial class PlayerScript : CharacterBody2D
 			}
 			var weaponAnimPlayer = (AnimationPlayer) weapon.Call("GetAnimPlayer");
 			weaponAnimPlayer.Play(attack.AttackAnim, -1, timeScale);
-			//Velocity = weapon.GetParent<Node2D>().GetGlobalTransform().BasisXform(attack.Displacement);
+			Velocity = weapon.GetParent<Node2D>().GetGlobalTransform().BasisXform(attack.Displacement);
 			await ToSignal(weaponAnimPlayer, "animation_finished");
 			weapon.Call("SetAttacking", false);
 			_combo += attack.Combo;

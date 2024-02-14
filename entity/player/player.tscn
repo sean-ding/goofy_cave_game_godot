@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccp166nta2ifk"]
+[gd_scene load_steps=5 format=3 uid="uid://ccp166nta2ifk"]
 
 [ext_resource type="Script" path="res://entity/player/PlayerScript.cs" id="1_6fgmi"]
 [ext_resource type="Texture2D" uid="uid://b32dtw0trqprd" path="res://resource/tilemap/curses_vector_24x36.png" id="1_ixcx1"]
-[ext_resource type="Script" path="res://entity/player/PlayerSprite.cs" id="3_upvpa"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rhahk"]
 height = 25.0
@@ -20,6 +19,7 @@ Speed = 1.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_rhahk")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="SpriteContainer" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteContainer"]
 texture = SubResource("AtlasTexture_08oeg")
-script = ExtResource("3_upvpa")
