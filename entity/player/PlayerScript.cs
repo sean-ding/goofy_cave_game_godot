@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Numerics;
 using Godot;
 using Vector2 = Godot.Vector2;
 
@@ -10,8 +9,8 @@ public partial class PlayerScript : CharacterBody2D
 {
 	[Export] public float Speed = 200.0f;
 	[Export] public float LerpSpeed = 0.1f;
-	[Export] public float Acceleration = 10000f;
-	[Export] public float Deceleration = 10000f;
+	[Export] public float Acceleration = 2000f;
+	[Export] public float Deceleration = 2000f;
 	
 	public List<Node2D> EquippedList = new();
 	
@@ -40,13 +39,10 @@ public partial class PlayerScript : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		var velocity = Vector2.Zero;
-
 		var direction = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 		if (direction != Vector2.Zero)
 		{
-			velocity = direction.Normalized() * Speed;
-			Velocity = Velocity.MoveToward(velocity, Acceleration * (float) delta);
+			Velocity = Velocity.MoveToward(direction.Normalized() * Speed, Acceleration * (float) delta);
 		}
 		else
 		{
@@ -54,13 +50,13 @@ public partial class PlayerScript : CharacterBody2D
 		}
 		
 		MoveAndSlide();
-		
-		_debugLabel.Text = "Combo Number: " + _combo + "\nCan Combo: " + _comboWindow + "\n\nVelocity: " + Velocity + "\nTarget Velocity: " + velocity;
 	}
 
 	public override void _Process(double delta)
 	{
 		_sprite.GlobalPosition = _sprite.GlobalPosition.Lerp(GlobalPosition, (float) delta * 100);
+        
+		_debugLabel.Text = "Combo Number: " + _combo + "\nCan Combo: " + _comboWindow;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -109,11 +105,11 @@ public partial class PlayerScript : CharacterBody2D
 			weapon.GetParent<Node2D>().LookAt(GetGlobalMousePosition());
 			var attack = (AttackData) weapon.Call("LightAttack", _combo);
 			weapon.Call("SetAttacking", true);
-			if (attack.ComboPreTime < shortestPreTime || shortestPreTime < 0)
+			if ((attack.ComboPreTime < shortestPreTime && attack.ComboPreTime != 0) || shortestPreTime < 0)
 			{
 				shortestPreTime = attack.ComboPreTime;
 			}
-			if (attack.ComboPostTime < shortestPostTime || shortestPostTime < 0)
+			if ((attack.ComboPostTime < shortestPostTime && attack.ComboPostTime != 0) || shortestPostTime < 0)
 			{
 				shortestPostTime = attack.ComboPostTime;
 			}

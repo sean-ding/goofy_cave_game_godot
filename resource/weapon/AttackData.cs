@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class AttackData : Node
 {
@@ -20,8 +21,8 @@ public partial class AttackData : Node
 		Axiomatic,
 		Null
 	}
-	public double Damage { get; set; }
-	public DamageTypes DamageType { get; set; }
+	public List<double> DamageList { get; set; }
+	public List<DamageTypes> DamageTypeList { get; set; }
 	public float AttackTime { get; set; }
 	public Vector2 Displacement { get; set; }
 	public Vector2 Knockback { get; set; }
@@ -29,10 +30,10 @@ public partial class AttackData : Node
 	public int Combo { get; set; }
 	public float ComboPostTime { get; set; }
 	public float ComboPreTime { get; set; }
-	public AttackData(double damage, DamageTypes damageType, float attackTime, Vector2 displacement, Vector2 knockback, string attackAnim, int combo, float comboPostTime, float comboPreTime = -1)
+	public AttackData(List<double> damageList, List<DamageTypes> damageTypeList, float attackTime, Vector2 displacement, Vector2 knockback, string attackAnim, int combo, float comboPostTime, float comboPreTime = -1)
 	{
-		Damage = damage;
-		DamageType = damageType;
+		DamageList = damageList;
+		DamageTypeList = damageTypeList;
 		AttackTime = attackTime;
 		Displacement = displacement;
 		Knockback = knockback;

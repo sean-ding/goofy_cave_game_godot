@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cx06803qwxqw4"]
+[gd_scene load_steps=9 format=3 uid="uid://cx06803qwxqw4"]
 
 [ext_resource type="PackedScene" uid="uid://ccp166nta2ifk" path="res://entity/player/player.tscn" id="1_s1f2j"]
 [ext_resource type="Script" path="res://scene/Main.cs" id="1_wtyah"]
 [ext_resource type="Texture2D" uid="uid://b32dtw0trqprd" path="res://resource/tilemap/curses_vector_24x36.png" id="2_3ps7u"]
 [ext_resource type="PackedScene" uid="uid://cwuy54p1kmwlr" path="res://item/weapon/fist/fist.tscn" id="4_2bhte"]
 [ext_resource type="Script" path="res://scene/PlayerCamera.cs" id="4_u6dxp"]
+[ext_resource type="PackedScene" uid="uid://dojxj8ljexev7" path="res://entity/swarmer/swarmer.tscn" id="6_07evv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fxjpk"]
 texture = ExtResource("2_3ps7u")
@@ -807,7 +808,11 @@ Speed = 200.0
 
 [node name="RightFoot" type="Node2D" parent="Player/Limbs"]
 
+[node name="Fist" parent="Player/Limbs/RightFoot" instance=ExtResource("4_2bhte")]
+
 [node name="LeftFoot" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/LeftFoot" instance=ExtResource("4_2bhte")]
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 script = ExtResource("4_u6dxp")
@@ -819,5 +824,9 @@ offset_right = -126.0
 offset_bottom = -116.0
 text = "Combo Number: "
 
+[node name="Swarmer" parent="." instance=ExtResource("6_07evv")]
+
 [connection signal="body_entered" from="Player/Limbs/RightHand/Fist" to="Player/Limbs/RightHand/Fist" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Player/Limbs/LeftHand/Fist" to="Player/Limbs/LeftHand/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightFoot/Fist" to="Player/Limbs/RightFoot/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/LeftFoot/Fist" to="Player/Limbs/LeftFoot/Fist" method="_OnBodyEntered"]

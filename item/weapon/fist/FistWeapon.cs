@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace goofy_cave_game_godot.item.weapon.fist;
@@ -20,8 +21,8 @@ public partial class FistWeapon : Area2D
 
 		_lightAttack1 = new AttackData
 		(
-			3,
-			AttackData.DamageTypes.Bludgeon,
+			new List<double> {3},
+			new List<AttackData.DamageTypes> { AttackData.DamageTypes.Bludgeon },
 			0.2f,
 			new Vector2(300, 0),
 			new Vector2(-300, 0),
@@ -32,8 +33,8 @@ public partial class FistWeapon : Area2D
 		
 		_lightAttack2 = new AttackData
 		(
-			3,
-			AttackData.DamageTypes.Bludgeon,
+			new List<double> {4},
+			new List<AttackData.DamageTypes> { AttackData.DamageTypes.Bludgeon },
 			0.2f,
 			new Vector2(300, 0),
 			new Vector2(-300, 0),
@@ -44,11 +45,11 @@ public partial class FistWeapon : Area2D
 		
 		_lightAttack3 = new AttackData
 		(
-			5,
-			AttackData.DamageTypes.Bludgeon,
+			new List<double> {5},
+			new List<AttackData.DamageTypes> { AttackData.DamageTypes.Bludgeon },
 			0.3f,
-			new Vector2(500, 0),
-			new Vector2(-500, 0),
+			new Vector2(400, 0),
+			new Vector2(-400, 0),
 			"weapon_fist/lightattack3",
 			-2,
 			0
@@ -56,8 +57,8 @@ public partial class FistWeapon : Area2D
 		
 		_heavyAttack1 = new AttackData
 		(
-			10,
-			AttackData.DamageTypes.Bludgeon,
+			new List<double> {10},
+			new List<AttackData.DamageTypes> { AttackData.DamageTypes.Bludgeon },
 			0.8f,
 			new Vector2(800, 0),
 			new Vector2(-1000, 0),

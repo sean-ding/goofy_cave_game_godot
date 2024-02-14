@@ -16,10 +16,6 @@ config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 run/flush_stdout_on_print.debug=false
 config/icon="res://icon.svg"
 
-[debug]
-
-settings/stdout/print_fps=true
-
 [display]
 
 window/size/viewport_width=640

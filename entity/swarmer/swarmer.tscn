@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://dojxj8ljexev7"]
+
+[ext_resource type="Script" path="res://entity/swarmer/SwarmerScript.cs" id="1_dw0re"]
+[ext_resource type="Texture2D" uid="uid://b32dtw0trqprd" path="res://resource/tilemap/curses_vector_24x36.png" id="1_sxo2y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hthbn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipngg"]
+atlas = ExtResource("1_sxo2y")
+region = Rect2(240, 72, 24, 36)
+margin = Rect2(0, 1.3, 0, 0)
+
+[node name="Swarmer" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_dw0re")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hthbn")
+
+[node name="SpriteContainer" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="SpriteContainer"]
+texture = SubResource("AtlasTexture_ipngg")

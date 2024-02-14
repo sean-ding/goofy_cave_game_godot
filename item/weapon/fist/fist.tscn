@@ -14,7 +14,7 @@ margin = Rect2(5.9, 1.75, 0, 0)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rh2cy"]
 
-[node name="Fist" type="Area2D"]
+[node name="Fist" type="Area2D" groups=["weapon"]]
 position = Vector2(38, 0)
 script = ExtResource("1_yrwf1")
 
