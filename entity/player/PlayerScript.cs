@@ -98,8 +98,8 @@ public partial class PlayerScript : CharacterBody2D
 			}
 		}
 
-		var timeScale = totalTime / longestAttack * ((float) Math.Log10(weaponList.Count) * -0.5f + 1);
-		_debugLabel.Text = "Weapon Count: " + weaponList.Count + "\nTime Scale: " + timeScale + "\nTotal Time: " + totalTime + "\nLongest Attack: " + longestAttack + "\nMultiplier: " + ((float) Math.Log10(weaponList.Count) * -0.5f + 1);
+		var timeScale = (float) (totalTime / longestAttack * Math.Pow(Math.Log10(weaponList.Count) * -0.35f + 1, 2));
+		_debugLabel.Text = "Weapon Count: " + weaponList.Count + "\nTime Scale: " + timeScale + "\nTotal Time: " + totalTime + "\nLongest Attack: " + longestAttack + "\nMultiplier: " + Math.Pow(Math.Log10(weaponList.Count) * -0.35f + 1, 2);
 		foreach (var weapon in weaponList)
 		{
 			weapon.GetParent<Node2D>().LookAt(GetGlobalMousePosition());

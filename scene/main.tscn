@@ -806,6 +806,50 @@ Speed = 200.0
 
 [node name="Fist" parent="Player/Limbs/LeftHand" instance=ExtResource("4_2bhte")]
 
+[node name="RightHand2" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand2" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand3" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand3" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand4" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand4" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand5" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand5" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand6" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand6" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand7" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand7" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand8" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand8" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand9" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand9" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand10" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand10" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand11" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand11" instance=ExtResource("4_2bhte")]
+
+[node name="RightHand12" type="Node2D" parent="Player/Limbs"]
+
+[node name="Fist" parent="Player/Limbs/RightHand12" instance=ExtResource("4_2bhte")]
+
 [node name="PlayerCamera" type="Camera2D" parent="."]
 script = ExtResource("4_u6dxp")
 
@@ -820,3 +864,14 @@ text = "Combo Number: "
 
 [connection signal="body_entered" from="Player/Limbs/RightHand/Fist" to="Player/Limbs/RightHand/Fist" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Player/Limbs/LeftHand/Fist" to="Player/Limbs/LeftHand/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand2/Fist" to="Player/Limbs/RightHand2/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand3/Fist" to="Player/Limbs/RightHand3/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand4/Fist" to="Player/Limbs/RightHand4/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand5/Fist" to="Player/Limbs/RightHand5/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand6/Fist" to="Player/Limbs/RightHand6/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand7/Fist" to="Player/Limbs/RightHand7/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand8/Fist" to="Player/Limbs/RightHand8/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand9/Fist" to="Player/Limbs/RightHand9/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand10/Fist" to="Player/Limbs/RightHand10/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand11/Fist" to="Player/Limbs/RightHand11/Fist" method="_OnBodyEntered"]
+[connection signal="body_entered" from="Player/Limbs/RightHand12/Fist" to="Player/Limbs/RightHand12/Fist" method="_OnBodyEntered"]
