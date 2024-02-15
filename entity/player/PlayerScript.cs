@@ -56,7 +56,7 @@ public partial class PlayerScript : CharacterBody2D
 	{
 		_sprite.GlobalPosition = _sprite.GlobalPosition.Lerp(GlobalPosition, (float) delta * 100);
         
-		_debugLabel.Text = "Combo Number: " + _combo + "\nCan Combo: " + _comboWindow;
+		
 	}
 
 	public override void _Input(InputEvent @event)
@@ -98,8 +98,8 @@ public partial class PlayerScript : CharacterBody2D
 			}
 		}
 
-		var timeScale = totalTime / longestAttack * ((float) Math.Log(weaponList.Count) * -0.5f + 1);
-		
+		var timeScale = totalTime / longestAttack * ((float) Math.Log10(weaponList.Count) * -0.5f + 1);
+		_debugLabel.Text = "Weapon Count: " + weaponList.Count + "\nTime Scale: " + timeScale + "\nTotal Time: " + totalTime + "\nLongest Attack: " + longestAttack + "\nMultiplier: " + ((float) Math.Log10(weaponList.Count) * -0.5f + 1);
 		foreach (var weapon in weaponList)
 		{
 			weapon.GetParent<Node2D>().LookAt(GetGlobalMousePosition());

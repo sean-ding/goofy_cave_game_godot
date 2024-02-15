@@ -21,3 +21,5 @@ shape = SubResource("CircleShape2D_hthbn")
 
 [node name="Sprite2D" type="Sprite2D" parent="SpriteContainer"]
 texture = SubResource("AtlasTexture_ipngg")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

@@ -806,14 +806,6 @@ Speed = 200.0
 
 [node name="Fist" parent="Player/Limbs/LeftHand" instance=ExtResource("4_2bhte")]
 
-[node name="RightFoot" type="Node2D" parent="Player/Limbs"]
-
-[node name="Fist" parent="Player/Limbs/RightFoot" instance=ExtResource("4_2bhte")]
-
-[node name="LeftFoot" type="Node2D" parent="Player/Limbs"]
-
-[node name="Fist" parent="Player/Limbs/LeftFoot" instance=ExtResource("4_2bhte")]
-
 [node name="PlayerCamera" type="Camera2D" parent="."]
 script = ExtResource("4_u6dxp")
 
@@ -828,5 +820,3 @@ text = "Combo Number: "
 
 [connection signal="body_entered" from="Player/Limbs/RightHand/Fist" to="Player/Limbs/RightHand/Fist" method="_OnBodyEntered"]
 [connection signal="body_entered" from="Player/Limbs/LeftHand/Fist" to="Player/Limbs/LeftHand/Fist" method="_OnBodyEntered"]
-[connection signal="body_entered" from="Player/Limbs/RightFoot/Fist" to="Player/Limbs/RightFoot/Fist" method="_OnBodyEntered"]
-[connection signal="body_entered" from="Player/Limbs/LeftFoot/Fist" to="Player/Limbs/LeftFoot/Fist" method="_OnBodyEntered"]
